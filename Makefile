@@ -41,7 +41,7 @@ create_local_env:
 
 	poetry config repositories.${REPOSITORY_NAME} ${CODEARTIFACT_REPOSITORY_URL} \
 	&& poetry config http-basic.${REPOSITORY_NAME} ${CODEARTIFACT_USER} `aws codeartifact get-authorization-token --domain ${DOMAIN_NAME} --domain-owner ${DOMAIN_OWNER} --query authorizationToken --output text` \
-	&& poetry source add spectral-data-repository --secondary https://spectral-362197681756.d.codeartifact.us-east-2.amazonaws.com/pypi/spectral-data-repository/simple/ \
+	&& poetry source add spectral-data-repository --secondary https://${DOMAIN_NAME}-${DOMAIN_OWNER}.d.codeartifact.us-east-2.amazonaws.com/pypi/spectral-data-repository/simple/ \
 	&& poetry install \
 	&& poetry add spectral-data-lib==2.1.1 --source spectral-data-repository
 	@echo "Virtual environment created and activated, run 'poetry shell' to activate it"
