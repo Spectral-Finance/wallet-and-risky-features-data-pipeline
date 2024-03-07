@@ -1,0 +1,27 @@
+[default]
+UPDATED_FEATURES_DB_QUERY_DIR = 'src/pipelines/analytics/features/queries'
+MONGO_RETRY_WRITE_TO_FALSE="?readPreference=primary&directConnection=true&tls=true&tlsAllowInvalidCertificates=true&tlsAllowInvalidHostnames=true&retryWrites=false"
+FEATURE_DB_SECRET_NAME = 'prod/features-db-root'
+TRANSPOSE_API_TOKENS_METADATA_ENDPOINT=''
+
+[dev]
+DATA_LAKE_BUCKET_S3 = 's3://data-lakehouse-dev'
+DATA_LAKE_RAW_DATABASE = 'db_raw_dev'
+DATA_LAKE_STAGE_DATABASE = 'db_stage_dev'
+DATA_LAKE_ANALYTICS_DATABASE = 'db_analytics_dev'
+SECRET_NAME = 'dev/aave-compound-subgraph/documentdb'
+REGION = 'us-east-2'
+LOG_LEVEL = 'INFO'
+ETHEREUM_LAST_BLOCK='https://api.blockcypher.com/v1/eth/main'
+ETHEREUM_NODE_RPC_URL_SECRETS_MANAGER='prod/ethereum_node/rpc_urls'
+
+[prod]
+DATA_LAKE_BUCKET_S3 = 's3://data-lakehouse-prod'
+DATA_LAKE_RAW_DATABASE = 'db_raw_prod'
+DATA_LAKE_STAGE_DATABASE = 'db_stage_prod'
+DATA_LAKE_ANALYTICS_DATABASE = 'db_analytics_prod'
+SECRET_NAME = "prod/documentdb"
+REGION = 'us-east-2'
+LOG_LEVEL = 'INFO'
+ETHEREUM_LAST_BLOCK='https://api.blockcypher.com/v1/eth/main'
+ETHEREUM_NODE_RPC_URL_SECRETS_MANAGER='prod/ethereum_node/rpc_urls'

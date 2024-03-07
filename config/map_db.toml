@@ -1,0 +1,139 @@
+[coingecko_transaction_token_price_db]
+bronze_db_name = 'BRONZE_HISTORICAL_PRICES'
+silver_db_name = 'SILVER_HISTORICAL_PRICES'
+gold_db_name = 'GOLD_HISTORICAL_PRICES'
+collection_name =  'coingecko_token_prices'
+gold_wallet_prices = "coingecko_token_prices"
+
+[coinpaprika_transaction_other_token_price_db]
+db_name = 'SILVER_HISTORICAL_PRICES'
+collection_name =  'coinpaprika_10min_token_prices'
+
+[coinpaprika_transaction_eth_token_price_db]
+db_name = 'SILVER_HISTORICAL_PRICES'
+collection_name =  'coinpaprika_10min_eth_prices'
+
+[uniswap_transaction_token_price_db]
+bronze_db_name = 'BRONZE_HISTORICAL_PRICES'
+silver_db_name = 'SILVER_HISTORICAL_PRICES'
+collection_name = 'uniswap_transaction_token_prices'
+aave_token_collection_name = "aave_v2_token_list"
+v3_lp_token_list_collection  = "v3_tp_tokens_list"
+v2_lp_token_list_collection  = "v2_tp_tokens_list"
+
+[compound_transaction_token_price_db]
+bronze_db_name = 'BRONZE_HISTORICAL_PRICES'
+silver_db_name =  'SILVER_HISTORICAL_PRICES'
+collection_name = 'compound_transaction_prices'
+token_collection_name = 'compound_token_list'
+
+[coinpaprika_wallet_token_price_db]
+bronze_db_name = 'BRONZE_HISTORICAL_WALLET_PRICES'
+silver_db_name =  'SILVER_HISTORICAL_WALLET_PRICES'
+gold_db_name = 'GOLD_HISTORICAL_WALLET_PRICES'
+token_list_collection = 'coinpaprika_token_list'
+wallet_collection_name =  'coinpaprika_wallet_token_prices'
+token_info_collection = 'coinpaprika_token_info'
+gold_wallet_prices = "wallet_token_prices"
+
+[coingecko_wallet_token_price_db]
+bronze_db_name = 'BRONZE_HISTORICAL_WALLET_PRICES'
+silver_db_name = 'SILVER_HISTORICAL_WALLET_PRICES'
+gold_db_name = 'GOLD_HISTORICAL_WALLET_PRICES'
+token_list_collection = 'coingecko_token_list'
+wallet_collection_name =  'coingecko_wallet_token_prices'
+token_info_collection = 'coingecko_token_info'
+black_list_collection = 'coingecko_black_list'
+gold_wallet_prices = "wallet_token_prices"
+
+
+[uniswap_wallet_token_price_db]
+bronze_db_name = 'BRONZE_HISTORICAL_WALLET_PRICES'
+silver_db_name =  'SILVER_HISTORICAL_WALLET_PRICES'
+gold_db_name = 'GOLD_HISTORICAL_WALLET_PRICES'
+token_prices_collection = 'uniswap_wallet_token_prices'
+v2_token_list_collection = 'uniswap_v2_token_list'
+v3_token_list_collection = 'uniswap_v3_token_list'
+v2_token_prices = 'uniswap_v2_wallet_token_prices'
+v3_token_prices = 'uniswap_v3_wallet_token_prices'
+gold_wallet_prices = "wallet_token_prices"
+
+
+[rugpull_market_data_db]
+silver_db_name =  'SILVER_RUGPULL'
+gold_db_name = 'GOLD_RUGPULL'
+collection_name =  'rugpull_market_data'
+
+[market_data]
+gold_db_name = 'GOLD_MARKET_DATA'
+collection_name = 'top_token_market_data'
+
+[aave_subgraph_v1]
+bronze_db_name = 'BRONZE_SUBGRAPH'
+silver_db_name = 'SILVER_SUBGRAPH'
+gold_db_name = 'GOLD_SUBGRAPH'
+lending_collection_name = 'aave_v1_lending_events'
+borrow_collection_name = 'aave_v1_borrow_events'
+liquidation_collection_name = 'aave_v1_liquidation_events'
+redeem_collection_name = 'aave_v1_redeem_events'
+repay_collection_name = 'aave_v1_repay_events'
+usage_collection_name = 'aave_v1_usage_as_collateral_events'
+
+
+[aave_subgraph_v2]
+bronze_db_name = 'BRONZE_SUBGRAPH'
+silver_db_name = 'SILVER_SUBGRAPH'
+gold_db_name = 'GOLD_SUBGRAPH'
+lending_collection_name = 'aave_v2_lending_events'
+borrow_collection_name = 'aave_v2_borrow_events'
+liquidation_collection_name = 'aave_v2_liquidation_events'
+redeem_collection_name = 'aave_v2_redeem_events'
+repay_collection_name = 'aave_v2_repay_events'
+usage_collection_name = 'aave_v2_usage_as_collateral_events'
+token_list = 'aave_v2_token_list'
+
+
+[compound_subgraph]
+bronze_db_name = 'BRONZE_SUBGRAPH'
+silver_db_name = 'SILVER_SUBGRAPH'
+gold_db_name = 'GOLD_SUBGRAPH'
+lending_collection_name = 'compound_lending_events'
+borrow_collection_name = 'compound_borrow_events'
+liquidation_collection_name = 'compound_liquidation_events'
+redeem_collection_name = 'compound_redeem_events'
+repay_collection_name = 'compound_repay_events'
+transfer_collection_name = 'compound_transfer_events'
+mint_collection_name = 'compound_mint_events'
+token_list = 'compound_token_list'
+
+
+[aave_collateral_factor]
+silver_db_name = 'SILVER_COLLATERAL_FACTORS'
+gold_db_name = 'GOLD_COLLATERAL_FACTORS'
+silver_collection_name = 'aave_collateral_data'
+gold_collection_name = 'aave_collateral_data'
+
+
+[compound_collateral_factor]
+silver_db_name = 'SILVER_COLLATERAL_FACTORS'
+gold_db_name = 'GOLD_COLLATERAL_FACTORS'
+silver_collection_name = 'compound_collateral_data'
+gold_collection_name = 'compound_collateral_data'
+
+[unique_eoa_addresses]
+silver_db_name = 'SILVER_UNIQUE_EOA'
+gold_db_name = 'GOLD_UNIQUE_EOA'
+aave_collection_name = 'aave_unique_eoa'
+compound_collection_name = 'compound_unique_eoa'
+
+
+[market_indicator_data_db]
+silver_db_name = 'SILVER_MARKET_INDICATORS'
+silver_collection_name = 'market_indicators'
+
+[etherscan_data_db]
+bronze_db_name = 'BRONZE_ETHERSCAN_DB'
+silver_db_name = 'SILVER_ETHERSCAN_DB'
+normal_collection = 'ethereum_normal'
+internal_collection = 'ethereum_internal_tx'
+erc20_collection = 'ethereum_erc20'

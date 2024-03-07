@@ -1,0 +1,14 @@
+{
+    "PRICE_AGGREGATOR_AWS_CONFIG": {
+        "env": "dev",
+        "region": "us-east-2",
+        "security_groups": [
+          "sg-0be4452d376e0768e"
+        ],
+        "subnets": [
+          "subnet-0cda999743be8ebeb"
+        ]
+    },
+    "data_lakehouse_bucket": "data-lakehouse",
+    "environment": "dev",
+}

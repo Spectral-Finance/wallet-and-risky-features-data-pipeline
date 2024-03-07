@@ -1,0 +1,117 @@
+name :  CI/CD for ECS and MWAA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - devops/ecs/infrastructure/**
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: devops/ecs/infrastructure/
+        shell: bash
+
+    steps:
+    # Checkout the repository to the Github Actions
+      - name: Checkout
+        uses: actions/checkout@v3
+
+    # Install terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+    # Run terraform format
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+    # Initialize terraform
+      - name: Terraform Init
+        id: init
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: terraform init
+
+    # Terraform validate
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+    # Generate terraform plan
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+
+      - name: Update Pull Request
+        uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`\n
+            ${process.env.PLAN}
+            \`\`\`
+
+            </details>
+
+            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: |
+          echo "🚨 Terraform Plan Failed"
+          exit 1
+
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   env:
+      #     TF_WORKSPACE: 'prod'
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: terraform apply -auto-approve -input=false
+
+  deploy-dag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: jakejarvis/s3-sync-action@master
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        with:
+          args: --follow-symlinks --delete --exclude 'helper_dag.py'
+        env:
+          #TF_WORKSPACE: 'prod'
+          AWS_S3_BUCKET: credit-scoring-airflow-mwaa-prod
+          AWS_S3_REGION: us-east-2
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: 'devops/airflow/dags/'
+          DEST_DIR: 'dags/'

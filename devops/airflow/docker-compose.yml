@@ -1,0 +1,37 @@
+version: '3'
+services:
+
+  airflow-db:
+    image: postgres:9.6
+    container_name: airflow-db
+    restart: always
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - 5432:5432
+
+  airflow:
+    image: airflow-dev
+    build:
+      context: .
+    container_name: airflow
+    restart: always
+    depends_on:
+      - airflow-db
+    environment:
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: "postgresql+psycopg2://airflow:airflow@airflow-db:5432/airflow"
+      AIRFLOW__CORE__EXECUTOR: "LocalExecutor"
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW_HOME: "/opt/airflow"
+    volumes:
+      - ./dags:/opt/airflow/dags/
+    ports:
+      - 8080:8080
+    command: bash -x init.sh
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
