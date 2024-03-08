@@ -3500,11 +3500,6 @@ pyarrow = ">=9.0.0,<10.0.0"
 pymongo = ">=4.2.0,<5.0.0"
 toml = ">=0.10.2,<0.11.0"
 
-[package.source]
-type = "legacy"
-url = "https://spectral-362197681756.d.codeartifact.us-east-2.amazonaws.com/pypi/spectral-data-repository/simple"
-reference = "spectral-data-repository"
-
 [[package]]
 name = "stack-data"
 version = "0.6.3"
