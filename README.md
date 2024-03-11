@@ -6,6 +6,35 @@ To implement this project, we have deployed an Ethereum node on AWS using the Er
 
 If you want to know more details about the ethereum-etl lib, you can check the github repository: https://github.com/blockchain-etl/ethereum-etl
 
+## Features Data Dictionary
+
+This table describes various features used to analyze the overall activity of a user's wallet.
+
+| Feature Name | Data Type | Description |
+|---|---|---|
+| first_tx_timestamp | int | UNIX timestamp of the wallet's first transaction. |
+| last_tx_timestamp | int | UNIX timestamp of the wallet's last transaction. |
+| wallet_age | int | Time in seconds since `first_tx_timestamp`. |
+| incoming_tx_count | int | Number of incoming transactions to the wallet. |
+| outgoing_tx_count | int | Number of outgoing transactions from the wallet. |
+| net_incoming_tx_count | int | `incoming_tx_count` - `outgoing_tx_count` |
+| total_gas_paid_eth | float | Total gas paid in ETH by the wallet. |
+| avg_gas_paid_per_tx_eth | float | Average gas fee paid in ETH per transaction. |
+| risky_tx_count | int | Number of risky transactions. |
+| risky_unique_contract_count | int | Number of unique risky smart contracts the wallet has interacted with. |
+| risky_first_tx_timestamp | int | UNIX timestamp of the wallet's first risky transaction. |
+| risky_last_tx_timestamp | int | UNIX timestamp of the wallet's last risky transaction. |
+| risky_first_last_tx_timestamp_diff | int | `risky_first_tx_timestamp` - `risky_last_tx_timestamp` |
+| risky_sum_outgoing_amount_eth | float | Sum of outgoing amounts in ETH for all risky transactions. |
+| outgoing_tx_sum_eth | float | Total value in ETH of the wallet's outgoing transactions. |
+| incoming_tx_sum_eth | float | Total value in ETH of the wallet's incoming transactions. |
+| outgoing_tx_avg_eth | float | Average amount in ETH of the wallet's outgoing transactions. |
+| incoming_tx_avg_eth | float | Average amount in ETH of the wallet's incoming transactions. |
+| max_eth_ever | float | The wallet's maximum value in ETH ever, measured on the first block of each day. |
+| min_eth_ever | float | The wallet's minimum value in ETH (after the first nonzero balance event), measured on the first block of each day. |
+| total_balance_eth | float | The wallet's value in ETH, measured on the first block of the day. |
+
+
 ### Data Pipeline
 
 ![Data Pipeline](./docs/data_pipeline.png)
